@@ -9,32 +9,26 @@ type BoardProps = {
 
 class Board extends React.Component<BoardProps> {
   renderSquare(i: number) {
-    return(
+    return (
       <Square
         value={this.props.squares[i]}
+        key={i}
         onClick={() => this.props.onClick(i)}
       />
     );
   }
 
   render() {
+    const array = [...Array(3)];
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+        {array.map((x, row) => {
+          return (<div className="board-row" key={row}>
+            {array.map((x, square) => {
+              return this.renderSquare(row * 3 + square);
+            })}
+          </div>);
+        })}
       </div>
     );
   }
