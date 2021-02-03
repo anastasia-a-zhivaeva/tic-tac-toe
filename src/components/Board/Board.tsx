@@ -1,9 +1,10 @@
 import React from 'react';
+import { SquareHistory } from '../Game';
 import Square from '../Square';
 import './Board.scss';
 
 type BoardProps = {
-  squares: string[];
+  squares: SquareHistory[];
   onClick: (i: number) => void;
 };
 
@@ -11,7 +12,7 @@ class Board extends React.Component<BoardProps> {
   renderSquare(i: number) {
     return (
       <Square
-        value={this.props.squares[i]}
+        value={this.props.squares[i].symbol}
         key={i}
         onClick={() => this.props.onClick(i)}
       />

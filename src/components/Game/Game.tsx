@@ -4,8 +4,15 @@ import './Game.scss';
 
 type GameProps = {};
 
+export type SquareHistory = {
+  symbol: string;
+  col: number;
+  row: number;
+}
+
 type GameHistory = {
-  squares: string[];
+  squares: SquareHistory[];
+  index: number;
 };
 
 type GameState = {
@@ -19,7 +26,8 @@ class Game extends React.Component<GameProps, GameState> {
     super(props);
     this.state = {
       history: [{
-        squares: Array(9).fill(null),
+        squares: Array(9).fill({}),
+        index: -1,
       }],
       stepNumber: 0,
       xIsNext: true,
@@ -30,13 +38,18 @@ class Game extends React.Component<GameProps, GameState> {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+    if (calculateWinner(squares) || squares[i].symbol) {
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    squares[i] = {
+      symbol: this.state.xIsNext ? 'X' : 'O',
+      col: i % 3 + 1,
+      row: Math.floor(i / 3) + 1,
+    };
     this.setState({
       history: history.concat([{
-        squares: squares
+        squares: squares,
+        index: i,
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
@@ -57,7 +70,7 @@ class Game extends React.Component<GameProps, GameState> {
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go to move #' + move :
+        `Go to move # ${move} (${step.squares[step.index].col}, ${step.squares[step.index].row})`:
         'Go to game start';
       return (
         <li key={move}>
@@ -91,7 +104,7 @@ class Game extends React.Component<GameProps, GameState> {
 
 
 
-function calculateWinner(squares: string[]) {
+function calculateWinner(squares: SquareHistory[]) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -104,8 +117,8 @@ function calculateWinner(squares: string[]) {
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+    if (squares[a].symbol && squares[a].symbol === squares[b].symbol && squares[a].symbol === squares[c].symbol) {
+      return squares[a].symbol;
     }
   }
   return null;

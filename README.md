@@ -5,7 +5,7 @@ Then it was re-written in TypeScript and split by components \
 ---
 
 ### Extra features:
-- [ ] Display the location for each move in the format (col, row) in the move history list.
+- [x] Display the location for each move in the format (col, row) in the move history list.
 - [ ] Bold the currently selected item in the move list.
 - [x] Rewrite Board to use two loops to make the squares instead of hardcoding them.
 - [ ] Add a toggle button that lets you sort the moves in either ascending or descending order.
