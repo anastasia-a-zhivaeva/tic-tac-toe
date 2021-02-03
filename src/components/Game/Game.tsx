@@ -81,9 +81,9 @@ class Game extends React.Component<GameProps, GameState> {
 
     let status;
     if (winner) {
-      status = 'Winner: ' + winner;
+      status = `Winner: ${winner}`;
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      status = this.state.stepNumber === 9 ? 'It\'s a draw' : `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
     }
     return (
       <div className="game">
