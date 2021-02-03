@@ -1,7 +1,6 @@
 # TicTacToe game
 This project was created during [React Tutorial](https://reactjs.org/tutorial/tutorial.html) \
-Then it was re-written in TypeScript and split by components \
-
+Then it was re-written in TypeScript and split by components
 ---
 
 ### Extra features:
@@ -11,7 +10,6 @@ Then it was re-written in TypeScript and split by components \
 - [ ] Add a toggle button that lets you sort the moves in either ascending or descending order.
 - [ ] When someone wins, highlight the three squares that caused the win.
 - [ ] When no one wins, display a message about the result being a draw.
-
 ---
 
 There are also plans to write tests and add state management
