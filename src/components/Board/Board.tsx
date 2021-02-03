@@ -5,6 +5,7 @@ import './Board.scss';
 
 type BoardProps = {
   squares: SquareHistory[];
+  winnerMoves: number[],
   onClick: (i: number) => void;
 };
 
@@ -14,6 +15,7 @@ class Board extends React.Component<BoardProps> {
       <Square
         value={this.props.squares[i].symbol}
         key={i}
+        isWinnerMove={this.props.winnerMoves.includes(i) ?? false}
         onClick={() => this.props.onClick(i)}
       />
     );

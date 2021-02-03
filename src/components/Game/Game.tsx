@@ -8,7 +8,7 @@ export type SquareHistory = {
   symbol: string;
   col: number;
   row: number;
-}
+};
 
 type GameHistory = {
   squares: SquareHistory[];
@@ -20,6 +20,11 @@ type GameState = {
   stepNumber: number;
   xIsNext: boolean;
 }
+
+export type GameWinner = {
+  winner: string;
+  moves: number[];
+};
 
 class Game extends React.Component<GameProps, GameState> {
   constructor(props: GameProps) {
@@ -38,7 +43,8 @@ class Game extends React.Component<GameProps, GameState> {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i].symbol) {
+    const gameWinner = calculateWinner(squares);
+    if (gameWinner || squares[i].symbol) {
       return;
     }
     squares[i] = {
@@ -66,7 +72,7 @@ class Game extends React.Component<GameProps, GameState> {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
+    const gameWinner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
       const desc = move ?
@@ -80,8 +86,8 @@ class Game extends React.Component<GameProps, GameState> {
     });
 
     let status;
-    if (winner) {
-      status = `Winner: ${winner}`;
+    if (gameWinner) {
+      status = `Winner: ${gameWinner.winner}`;
     } else {
       status = this.state.stepNumber === 9 ? 'It\'s a draw' : `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
     }
@@ -90,6 +96,7 @@ class Game extends React.Component<GameProps, GameState> {
         <div className="game-board">
           <Board
             squares={current.squares}
+            winnerMoves={gameWinner?.moves ?? []}
             onClick={(i) => this.handleClick(i)}
           />
         </div>
@@ -104,7 +111,7 @@ class Game extends React.Component<GameProps, GameState> {
 
 
 
-function calculateWinner(squares: SquareHistory[]) {
+function calculateWinner(squares: SquareHistory[]): GameWinner | undefined {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -118,10 +125,13 @@ function calculateWinner(squares: SquareHistory[]) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a].symbol && squares[a].symbol === squares[b].symbol && squares[a].symbol === squares[c].symbol) {
-      return squares[a].symbol;
+      return {
+        winner: squares[a].symbol,
+        moves: lines[i],
+      };
     }
   }
-  return null;
+  return;
 }
 
 export default Game;

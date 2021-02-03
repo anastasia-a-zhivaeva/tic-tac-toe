@@ -3,12 +3,13 @@ import './Square.scss';
 
 type SquareProps = {
   value: string;
+  isWinnerMove: boolean;
   onClick: () => void;
 }
 
 function Square(props: SquareProps) {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button className={props.isWinnerMove ? 'winner-square' : 'square'} onClick={props.onClick}>
       {props.value}
     </button>
   );
