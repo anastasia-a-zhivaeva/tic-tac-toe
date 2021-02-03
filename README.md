@@ -1,4 +1,5 @@
 # TicTacToe game
+
 This project was created during [React Tutorial](https://reactjs.org/tutorial/tutorial.html) \
 Then it was re-written in TypeScript and split by components
 ---
