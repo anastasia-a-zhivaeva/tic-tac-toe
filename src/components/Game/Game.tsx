@@ -78,9 +78,10 @@ class Game extends React.Component<GameProps, GameState> {
       const desc = move ?
         `Go to move # ${move} (${step.squares[step.index].col}, ${step.squares[step.index].row})`:
         'Go to game start';
+      const className = move === this.state.stepNumber ? 'current-move' : '';
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button className={className} onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     });

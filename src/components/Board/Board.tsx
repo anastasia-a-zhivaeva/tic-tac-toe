@@ -11,11 +11,12 @@ type BoardProps = {
 
 class Board extends React.Component<BoardProps> {
   renderSquare(i: number) {
+    const isWinnerMove = this.props.winnerMoves.includes(i) ?? false;
     return (
       <Square
         value={this.props.squares[i].symbol}
         key={i}
-        isWinnerMove={this.props.winnerMoves.includes(i) ?? false}
+        isWinnerMove={isWinnerMove}
         onClick={() => this.props.onClick(i)}
       />
     );

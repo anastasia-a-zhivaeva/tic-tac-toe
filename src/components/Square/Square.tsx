@@ -8,8 +8,9 @@ type SquareProps = {
 }
 
 function Square(props: SquareProps) {
+  const className = props.isWinnerMove ? 'winner-square' : 'square'
   return (
-    <button className={props.isWinnerMove ? 'winner-square' : 'square'} onClick={props.onClick}>
+    <button className={className} onClick={props.onClick}>
       {props.value}
     </button>
   );
