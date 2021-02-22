@@ -10,7 +10,7 @@ type SquareProps = {
 function Square(props: SquareProps) {
   const className = props.isWinnerMove ? 'winner-square' : 'square'
   return (
-    <button className={className} onClick={props.onClick}>
+    <button className={className} onClick={props.onClick} data-testid="square">
       {props.value}
     </button>
   );

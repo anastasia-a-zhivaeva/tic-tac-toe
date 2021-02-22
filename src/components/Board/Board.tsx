@@ -25,7 +25,7 @@ class Board extends React.Component<BoardProps> {
   render() {
     const array = [...Array(3)];
     return (
-      <div>
+      <div data-testid="board">
         {array.map((x, row) => {
           return (<div className="board-row" key={row}>
             {array.map((x, square) => {

@@ -1,7 +1,8 @@
 # TicTacToe game
 
 This project was created during [React Tutorial](https://reactjs.org/tutorial/tutorial.html) \
-Then it was re-written in TypeScript and split by components
+Then it was re-written in TypeScript and split by components. \
+The project is also tested with Jest and Testing Library but not fully covered, just for learning how to test.
 
 ---
 
@@ -14,7 +15,7 @@ Then it was re-written in TypeScript and split by components
 - [x] When no one wins, display a message about the result being a draw.
 ---
 
-There are also plans to write tests and add state management
+There are also plans to add state management
 
 # Getting Started with Create React App
 

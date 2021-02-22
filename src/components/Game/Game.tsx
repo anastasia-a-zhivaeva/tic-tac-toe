@@ -93,7 +93,7 @@ class Game extends React.Component<GameProps, GameState> {
       status = this.state.stepNumber === 9 ? 'It\'s a draw' : `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
     }
     return (
-      <div className="game">
+      <div className="game" data-testid="game">
         <div className="game-board">
           <Board
             squares={current.squares}
